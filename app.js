@@ -1,6 +1,9 @@
 document.getElementById('button-addon2').addEventListener('click', function () {
     const searchText = document.getElementById('search-text').value;
-
+    const booksFound = document.getElementById('books-found');
+    booksFound.textContent = '';
+    const quantity = document.getElementById('quantity-msg');
+    quantity.classList.add("d-none");
     if (searchText === '') {
         const error = document.getElementById('error-msg');
         error.classList.remove("d-none");
@@ -8,6 +11,8 @@ document.getElementById('button-addon2').addEventListener('click', function () {
     else {
         const error = document.getElementById('error-msg');
         error.classList.add("d-none");
+        const spinner = document.getElementById('spinner');
+        spinner.classList.remove("d-none");
         fetch(`http://openlibrary.org/search.json?q=${searchText}`)
             .then(response => response.json())
             .then(json => seeList(json.docs))
@@ -16,9 +21,12 @@ document.getElementById('button-addon2').addEventListener('click', function () {
 const seeList = (books) => {
     const booksFound = document.getElementById('books-found');
     booksFound.innerHTML = '';
+    const spinner = document.getElementById('spinner');
+    spinner.classList.add("d-none");
     const quantity = document.getElementById('quantity-msg');
     quantity.innerHTML = `The total search results are ${books.length}`
     quantity.classList.remove("d-none");
+
     // for each function 
     books.forEach(book => {
         const div = document.createElement('div');
