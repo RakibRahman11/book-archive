@@ -13,7 +13,7 @@ document.getElementById('button-addon2').addEventListener('click', function () {
         error.classList.add("d-none");
         const spinner = document.getElementById('spinner');
         spinner.classList.remove("d-none");
-        fetch(`http://openlibrary.org/search.json?q=${searchText}`)
+        fetch(`https://openlibrary.org/search.json?q=${searchText}`)
             .then(response => response.json())
             .then(json => seeList(json.docs))
     }
